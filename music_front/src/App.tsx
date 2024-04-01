@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css'; // 스타일 정의는 App.css 파일에 추가하세요.
+import './App.css';
 
 const App: React.FC = () => {
   return (
