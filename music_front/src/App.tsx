@@ -12,9 +12,11 @@ const App: React.FC = () => {
     const files = event.target.files;
     if (files && files[0]) {
       const uploadedFile = files[0];
+      //check video file
       if (/\.(mp3|wav)$/i.test(uploadedFile.name)) {
         setFile(uploadedFile);
         // TODO: Handle file
+        // make video preview URL 
       } else {
         alert('Please select an MP3 or WAV file.');
       }
