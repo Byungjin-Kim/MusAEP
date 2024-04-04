@@ -7,32 +7,42 @@ const App: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
 
   //handler for drop event 
+  const handleFileChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    // Handle file selection from file input
+    const files = event.target.files;
+    if (files && files[0]) {
+      const uploadedFile = files[0];
+      if (/\.(mp3|wav)$/i.test(uploadedFile.name)) {
+        setFile(uploadedFile);
+        // TODO: Handle file
+      } else {
+        alert('Please select an MP3 or WAV file.');
+      }
+    }
+  }, []);
+
   const handleDrop = useCallback((event: React.DragEvent<HTMLDivElement>) => {
-    // Prevent default behavior (Prevent file from being opened)
+    // drag and rop file 
     event.preventDefault();
     event.stopPropagation();
 
-    // Check if files are dropped and take the first one
     if (event.dataTransfer.files && event.dataTransfer.files[0]) {
       const uploadedFile = event.dataTransfer.files[0];
-      // Check the file extension for mp3 or wav format
       if (/\.(mp3|wav)$/i.test(uploadedFile.name)) {
-        // If file is valid, update the state
         setFile(uploadedFile);
-        // TODO: Handle the file upload (e.g., send it to the server)
+        // TODO: Handle file to send to server.
       } else {
-        // Alert the user if the file format is not supported
         alert('Please drop an MP3 or WAV file.');
       }
     }
   }, []);
 
   // Handler for drag over event
-  const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
+  const handleDragOver = useCallback((event: React.DragEvent<HTMLDivElement>) => {
     // Prevent default behavior (Prevent file from being opened)
     event.preventDefault();
     event.stopPropagation();
-  };
+  }, []);
 
   return (
     <div className="App">
@@ -42,7 +52,10 @@ const App: React.FC = () => {
       </header>
 
       <div className="search-section">
-        <input type="text" placeholder="Search song or YouTube link" className="search-input" />
+        <input
+          type="text"
+          placeholder="Search song or YouTube link"
+          className="search-input" />
 
         <div className="hashtag-group">
           <span>#random</span>
@@ -51,11 +64,19 @@ const App: React.FC = () => {
         </div>
       </div>
 
-      <div className="video-preview">
-
+      <div className="file-upload-section" onDrop={handleDrop} onDragOver={handleDragOver}>
+        <input
+          type="file"
+          onChange={handleFileChange}
+          accept=".mp3,.wav"
+        />
+        {file && <p>File ready for analysis: {file.name}</p>}
       </div>
 
-      {/* 기타 필요한 섹션이나 컴포넌트 추가 위치 */}
+      <div className="video-preview">
+        <p>Video preview section</p>
+        {/* Video preview section */}
+      </div>
 
     </div>
   );
