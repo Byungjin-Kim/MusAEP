@@ -74,12 +74,6 @@ const App: React.FC = () => {
         />
         {file && <p>File ready for analysis: {file.name}</p>}
       </div>
-
-      <div className="video-preview">
-        <p>Video preview section</p>
-        {/* Video preview section */}
-      </div>
-
     </div>
   );
 }
