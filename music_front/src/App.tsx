@@ -51,6 +51,9 @@ const App: React.FC = () => {
       <header className="App-header">
         <h1>MusAEP</h1>
         <p>Music Analysis and Education Platform</p>
+        <p>
+          MusAEP is a web application designed to enrich music learning for all ages. It analyzes uploaded music files, providing insights into harmony, rhythm, and melody, and offers educational feedback. Ideal for musicians, educators, and students, MusAEP demystifies music theory and compositional techniques for both beginners and advanced learners.
+        </p>
       </header>
 
       <div className="search-section">
